@@ -1,0 +1,17 @@
+<div class="welcome-container">
+  <h1 class="title">Your Thoughts, Organized</h1>
+  <p class="description">
+    Nexus Notes is a powerful note-taking tool designed for developers, perfect for managing ideas, tasks, and projects with ease.
+  </p>
+  <div class="button-group">
+
+  <button class="btn primary" (click)="onGetStarted()">Get Started</button>
+</div>
+
+<app-auth-modal
+  [visible]="showAuthModal"
+  [mode]="authMode"
+  (visibleChange)="showAuthModal = $event"
+></app-auth-modal>
+
+</div>
