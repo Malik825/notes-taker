@@ -1,0 +1,47 @@
+<div class="dashboard-container">
+  <!-- 🔍 Search + Sort Bar -->
+  <div class="top-bar">
+    <input
+      type="text"
+      class="search-input"
+      [value]="searchTerm()"
+      (input)="onSearch($event)"
+      placeholder="🔍 Search notes..."
+      aria-label="Search notes"
+    />
+
+    <select class="sort-select" (change)="changeSort($any($event.target).value)">
+      <option>Sort by</option>
+      <option value="latest">Latest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+  </div>
+
+  <!-- 🛑 Empty state -->
+  <div *ngIf="filteredNotes().length === 0" class="empty-state">
+    <p>No notes found. Try adjusting your search or tag filter.</p>
+  </div>
+
+  <!-- 🗂️ Notes Grid -->
+  <div class="notes-grid">
+    <div
+      class="note-card animate__animated animate__fadeInUp"
+      *ngFor="let note of filteredNotes()"
+      [routerLink]="['/notes', note.id]"
+      role="button"
+      aria-label="Open note"
+    >
+      <h3>{{ note.title || 'Untitled' }}</h3>
+      <p>{{ note.content | slice: 0:120 }}...</p>
+
+      <!-- 🏷 Tags under each note -->
+      <div class="note-tags" *ngIf="note.tags?.length">
+        <span *ngFor="let tag of note.tags" class="note-tag">{{ tag }}</span>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn small secondary">Read More</button>
+      </div>
+    </div>
+  </div>
+</div>
