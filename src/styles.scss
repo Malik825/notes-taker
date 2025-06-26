@@ -1,1 +1,130 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/_theme.scss' as *;
+@use './styles/_reset.scss' as *;
+
+// ✅ Only use @import for external URLs (e.g., fonts)
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* 🔄 Theme Classes */
+
+
+
+/* 🌐 Global Styles */
+html{
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.4;
+}
+
+main {
+
+}
+.container{
+  margin: 0 auto;
+  max-width: 80%;
+  @media screen and (max-width: 768px) {
+    max-width:95%;
+  }
+}
+
+/* 🎉 Toast Notifications */
+.crazy-toast {
+  animation: bounceSpin 0.6s ease-out both;
+  background: linear-gradient(to right, #8b5cf6, #4c1d95);
+  color: white !important;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: fit-content;
+  position: fixed;
+  right: 8px;
+  bottom: 15px;
+  z-index: 900;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toast-success {
+  background: linear-gradient(to right, #22c55e, #16a34a);
+  color: white;
+}
+
+.toast-error {
+  background: linear-gradient(to right, #ef4444, #b91c1c);
+  color: white;
+}
+
+.toast-info {
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  color: white;
+}
+
+.toast-warning {
+  background: linear-gradient(to right, #facc15, #eab308);
+  color: #111;
+}
+
+.toast-title {
+  margin-bottom: 0.25rem;
+}
+
+.toast-message {
+  font-size: 0.875rem;
+}
+
+.toast-close-button {
+  color: white;
+  font-weight: bold;
+  background: transparent !important;
+  border: none !important;
+  font-size: 1.2rem;
+  top: 4px;
+  right: 16px;
+  margin-right: 1.2rem;
+}
+
+/* ✨ Toast Animation */
+@keyframes bounceSpin {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(100%) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-10px) rotate(2deg);
+  }
+  70% {
+    transform: scale(0.95) translateY(5px) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+/* Example usage of accent color in components */
+.accent-button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.accent-button:hover {
+  opacity: 0.9;
+}
+
+.accent-border {
+  border: 2px solid var(--accent-color);
+}
+
+.accent-text {
+  color: var(--accent-color);
+}

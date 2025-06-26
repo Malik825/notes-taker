@@ -1,0 +1,112 @@
+/* 🌞 Light Theme */
+body.light-theme {
+  --bg-color: #ffffff;
+  --surface-color: #f9fafb;
+  --text-color: #1e293b;
+  --primary-color: #0284c7;     /* from $primary 600 */
+  --secondary-color: #7c3aed;   /* from $secondary 600 */
+  --border-color: #ddd;
+  --accent-color: var(--user-accent-color, #22d3ee); /* fallback to default */
+}
+
+/* 🌚 Dark Theme */
+body.dark-theme {
+  --bg-color: #0f172a;
+  --surface-color: #1e293b;
+  --text-color: #f1f5f9;
+  --primary-color: #7dd3fc;     /* from $primary 300 */
+  --secondary-color: #c4b5fd;   /* from $secondary 300 */
+  --border-color: rgba(255,255,255, 0.1);
+  --accent-color: var(--user-accent-color, #22d3ee); /* fallback to default */
+}
+
+/* 🌇 Sunset Theme */
+body.sunset-theme {
+  --bg-color: #fff7ed;
+  --surface-color: #ffedd5;
+  --text-color: #7c2d12;
+  --primary-color: #f97316;
+  --secondary-color: #db2777;
+  --border-color: #ddd;
+  --accent-color: var(--user-accent-color, #f97316); /* fallback to theme primary */
+}
+
+/* 🌃 Night Theme */
+body.night-theme {
+  --bg-color: #0b1120;             /* Deep navy violet */
+  --surface-color: #1e293b;        /* Slightly lighter surface layer */
+  --text-color: #e2e8f0;           /* High contrast light text */
+  --primary-color: #38bdf8;        /* Sky-400 (bright primary) */
+  --secondary-color: #a78bfa;      /* Violet-400 (soft secondary) */
+  --border-color: rgba(255, 255, 255, 0.08); /* Subtle border */
+  --hover-bg-color: #273549;       /* Slightly brighter surface for hovers */
+  --muted-text-color: #94a3b8;     /* Slate-400 for less important text */
+  --accent-color: var(--user-accent-color, #22d3ee); /* Dynamic accent with fallback */
+}
+
+body.ocean-theme {
+  --bg-color: #e6faff;           /* soft seafoam background */
+  --surface-color: #d0f0fd;      /* light turquoise panels */
+  --text-color: #003f5c;         /* deep navy blue text */
+  --primary-color: #00b4d8;      /* vivid aqua (main action color) */
+  --secondary-color: #0077b6;    /* strong ocean blue for accents */
+  --border-color: #90e0ef;       /* pale aqua border */
+  --accent-color: var(--user-accent-color, #00b4d8); /* fallback to theme primary */
+}
+
+body.forest-theme {
+  --bg-color: #f0fdf4;
+  --surface-color: #dcfce7;
+  --text-color: #14532d;
+  --primary-color: #22c55e;       /* green-500 */
+  --secondary-color: #65a30d;     /* lime-600 */
+  --border-color: #bbf7d0;
+  --accent-color: var(--user-accent-color, #22c55e); /* fallback to theme primary */
+}
+
+body.cloud-theme {
+  --bg-color: #f8fafc;
+  --surface-color: #e2e8f0;
+  --text-color: #334155;
+  --primary-color: #64748b;       /* slate-500 */
+  --secondary-color: #94a3b8;     /* slate-400 */
+  --border-color: #cbd5e1;
+  --accent-color: var(--user-accent-color, #64748b); /* fallback to theme primary */
+}
+
+body.strawberry-theme {
+  --bg-color: #fff1f2;
+  --surface-color: #ffe4e6;
+  --text-color: #881337;
+  --primary-color: #f43f5e;       /* rose-500 */
+  --secondary-color: #e11d48;     /* rose-600 */
+  --border-color: #fbcfe8;
+  --accent-color: var(--user-accent-color, #f43f5e); /* fallback to theme primary */
+}
+
+/* Example usage of accent color in components */
+.accent-button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.accent-button:hover {
+  opacity: 0.9;
+}
+
+.accent-border {
+  border: 2px solid var(--accent-color);
+}
+
+.accent-text {
+  color: var(--accent-color);
+}
+
+.accent-bg {
+  background-color: var(--accent-color);
+}
