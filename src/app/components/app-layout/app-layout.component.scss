@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1000; // Below hamburger
   animation: fadeInNavbar 0.5s ease-out;
 
   .logo {
@@ -31,10 +31,10 @@
     color: var(--text-color);
     font-size: 1.4rem;
     cursor: pointer;
-    position: fixed;
-    top: 2rem;
+    position: fixed; // Fixed to stay on top
+    top: 1rem; // Adjusted to sit within navbar padding
     right: 1rem;
-    z-index: 1001;
+    z-index: 1001; // Above navbar
     display: none; // Hidden by default
     transition: transform 0.3s ease, opacity 0.3s ease;
 
@@ -129,10 +129,9 @@
   background: var(--surface-color);
   transition: transform 0.5s ease, width 0.5s ease, opacity 0.5s ease;
   overflow-x: hidden;
-  // box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 900; // Below navbar and hamburger
   position: fixed;
-  top: 4.3rem;
+  top: 4.3rem; // Below navbar
   left: 0;
   height: 100%;
   transform: translateX(-100%); // Hidden by default
@@ -140,10 +139,11 @@
 
   @media (min-width: 992px) {
     transform: translateX(0); // Visible on large screens
-    
   }
-  @media (max-width:768px) {
-    top: 4.5rem;
+
+  @media (max-width: 768px) {
+    top: 4.5rem; // Adjusted for mobile navbar height
+    width: 100%; // Full width on mobile
   }
 
   &.collapsed {
@@ -223,6 +223,7 @@
     &:hover {
       opacity: 0.7;
     }
+
     @media screen and (max-width: 768px) {
       margin: 0;
     }
@@ -232,12 +233,12 @@
 .layout {
   &.expanded {
     .main {
-      margin-left: 240px; // Set margin to accommodate sidebar on mobile when expanded
+      margin-left: 240px; // Set margin to accommodate sidebar on desktop
       animation: shiftIn 0.5s ease-out;
     }
 
     app-notes-dashboard {
-      margin-left: 240px; // Ensure notes-dashboard aligns with sidebar when expanded
+      margin-left: 240px; // Ensure notes-dashboard aligns with sidebar on desktop
       animation: shiftIn 0.5s ease-out;
     }
   }
@@ -246,11 +247,13 @@
     .main {
       margin-left: 0; // No margin when sidebar is collapsed on mobile
       animation: shiftOut 0.5s ease-out;
+      overflow-x: hidden; // Prevent horizontal overflow on mobile
     }
 
     app-notes-dashboard {
       margin-left: 0 !important; // Reset margin for notes-dashboard when sidebar is closed
       animation: shiftOut 0.5s ease-out;
+      overflow-x: hidden; // Prevent horizontal overflow
     }
   }
 }
@@ -261,28 +264,33 @@
   }
 
   .layout.expanded .main {
-    margin-left: 100%; // Full width adjustment for mobile, matching sidebar width
+    margin-left: 0; // No margin on mobile when expanded, handled by transform
     animation: shiftIn 0.5s ease-out;
   }
 
   .layout.expanded app-notes-dashboard {
-    margin-left: 100%; // Adjust notes-dashboard on mobile when expanded
+    margin-left: 0; // No margin on mobile
     animation: shiftIn 0.5s ease-out;
+  }
+
+  .layout .main,
+  .layout app-notes-dashboard {
+    overflow-x: hidden; // Ensure no horizontal overflow on mobile
   }
 }
 
 .hamburger {
   position: fixed;
-  top: 2rem;
+  top: 1rem; // Align with navbar top padding
   right: 1rem;
-  z-index: 1001;
-  font-size: 1.1rem;
+  z-index: 1001; // Above navbar and sidebar
+  font-size: 1.4rem; // Consistent with navbar hamburger
   display: none;
   cursor: pointer;
   background: transparent;
 
   @media (max-width: 991px) {
-    display: block;
+    display: block; // Show on mobile
   }
 }
 
@@ -409,17 +417,18 @@ body.dark-theme .hamburger {
     transform: translateY(0);
   }
 }
-.profile{
+
+.profile {
   display: flex;
   flex-direction: column;
+
   @media screen and (max-width: 768px) {
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    
   }
 }
-.user{
+
+.user {
   margin-left: 1rem;
- 
 }
