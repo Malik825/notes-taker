@@ -1,0 +1,45 @@
+<div class="archive-header">
+  <h1>Notes Archive</h1>
+  <p>Your saved notes collection</p>
+  <a routerLink="/notes" class="back-link">← Back to Notes</a>
+</div>
+
+<div class="archive-toolbar">
+  <input
+    type="text"
+    placeholder="🔍 Search archived notes..."
+    [(ngModel)]="searchTerm"
+    class="search-input"
+  />
+
+  <select [(ngModel)]="sortOrder" class="sort-select">
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+  </select>
+</div>
+
+<!-- Empty state -->
+<div *ngIf="filteredArchivedNotes().length === 0" class="empty-archive">
+  <p>No archived notes found.</p>
+</div>
+
+<!-- Archived Notes Grid -->
+<div class="archived-notes-grid">
+  <div class="archived-note-card" *ngFor="let note of filteredArchivedNotes()">
+    <div class="note-card-header">
+      <h2>{{ note.title || 'Untitled Note' }}</h2>
+      <span class="date">{{ note.updatedAt | date: 'mediumDate' }}</span>
+    </div>
+
+    <p class="note-preview">{{ note.content }}</p>
+
+    <div class="tags" *ngIf="note.tags?.length">
+      <span class="tag" *ngFor="let tag of note.tags">#{{ tag }}</span>
+    </div>
+
+    <div class="card-actions">
+      <button class="btn small restore" (click)="restoreNote(note)">🔄</button>
+      <button class="btn small delete" (click)="deleteArchivedNote(note)">🗑️</button>
+    </div>
+  </div>
+</div>

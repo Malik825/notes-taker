@@ -1,0 +1,12 @@
+
+<ul class="tags-list">
+  <li
+    *ngFor="let tag of tags"
+    (click)="onTagClick(tag)"
+    [ngClass]="{ 'tag-item': true, 'active': selectedTag === tag }">
+    
+    <span class="checkmark" *ngIf="selectedTag === tag">✔️</span>
+    {{ tag }}
+  </li>
+</ul>
+

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NoteService } from '../../services/note.service';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Note } from '../../models/note.model';
 
 @Component({
   selector: 'app-notes-dashboard',
@@ -14,13 +16,14 @@ import { AuthService } from '../../services/auth.service';
 export class NotesDashboardComponent implements OnInit {
   constructor(
     public noteService: NoteService,
-    private auth: AuthService // ✅ Need to get user ID
+    private auth: AuthService ,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     const user = this.auth.currentUser();
     if (user) {
-      this.noteService.loadNotes(user.id); // ✅ Ensure notes load after refresh
+      this.noteService.loadNotes(user.id); 
     }
   }
 
@@ -48,4 +51,15 @@ export class NotesDashboardComponent implements OnInit {
     const value = (event.target as HTMLInputElement).value;
     this.noteService.searchTerm.set(value);
   }
+  archive(event: Event, note: Note) {
+  event.preventDefault(); // Prevent routerLink
+  event.stopPropagation();
+
+  const user = this.auth.currentUser();
+  if (!user) return;
+
+  this.noteService.archiveNote(note.id, user.id);
+  this.toastr.info('Note archived!');
+}
+
 }

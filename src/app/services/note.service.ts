@@ -97,4 +97,30 @@ export class NoteService {
       return matchesSearch && matchesTag;
     });
   });
+  archiveNote(noteId: string, userId: string): void {
+  const notes = this.notes();
+  const updated = notes.map(n =>
+    n.id === noteId ? { ...n, archived: true } : n
+  );
+  this.notes.set(updated);
+  this.saveNotes(userId);
+}
+
+unarchiveNote(noteId: string, userId: string): void {
+  const notes = this.notes();
+  const updated = notes.map(n =>
+    n.id === noteId ? { ...n, archived: false } : n
+  );
+  this.notes.set(updated);
+  this.saveNotes(userId);
+}
+
+getArchivedNotes(): Note[] {
+  return this.notes().filter(n => n.archived);
+}
+
+getActiveNotes(): Note[] {
+  return this.notes().filter(n => !n.archived);
+}
+
 }

@@ -1,6 +1,18 @@
 <div class="sidebar">
-  <button routerLink="/dashboard" [class.active]="currentRoute === '/dashboard'">Dashboard</button>
-  <button routerLink="/notes" [class.active]="currentRoute === '/notes'">Notes</button>
-  <button routerLink="/settings" [class.active]="currentRoute === '/settings'">Settings</button>
- 
+
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <i class="fas fa-chart-pie"></i><span>Dashboard</span>
+      </a>
+      <a routerLink="/notes" routerLinkActive="active">
+        <i class="fas fa-book"></i><span>My Notes</span>
+      </a>
+      <a routerLink="/archive" routerLinkActive="active">
+        <i class="fas fa-archive"></i><span>Archived Notes</span>
+      </a>
+      <a routerLink="/settings" routerLinkActive="active">
+        <i class="fas fa-cog"></i><span>Settings</span>
+      </a>
+      
+</nav>
 </div>

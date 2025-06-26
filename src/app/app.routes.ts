@@ -45,6 +45,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./components/settings/settings.component').then(m => m.SettingsComponent)
   },
+  {
+  path: 'archive',
+  loadComponent: () =>
+    import('./components/archived/archived.component').then(m => m.ArchivedComponent)
+},
+
   // Wildcard route for 404
   { path: '**', redirectTo: 'welcome' }
 ];
