@@ -1,0 +1,45 @@
+<div class="overlay" *ngIf="visible">
+  <div class=" modal slide-in">
+    <!-- Header Tabs -->
+    <div class="tabs">
+      <button type="button" [class.active]="mode === 'signin'" (click)="switchMode('signin')">Sign In</button>
+      <button type="button" [class.active]="mode === 'signup'" (click)="switchMode('signup')">Sign Up</button>
+      <button type="button" [class.active]="mode === 'reset'" (click)="switchMode('reset')">Reset</button>
+    </div>
+
+    <!-- Sign In Form -->
+  <form *ngIf="mode === 'signin'" [formGroup]="signinForm" (ngSubmit)="signIn()" class="fade-in">
+
+      <h2>Sign In</h2>
+      <div *ngIf="error()" class="form-error">{{ error() }}</div>
+      <input type="email" formControlName="email" placeholder="Email" />
+      <input type="password" formControlName="password" placeholder="Password" />
+      <button type="submit" class="submit-btn">Login</button>
+    </form>
+
+    <!-- Sign Up Form -->
+   <form *ngIf="mode === 'signup'" [formGroup]="signupForm" (ngSubmit)="signUp()" class="fade-in">
+
+      <h2>Create Account</h2>
+      <div *ngIf="error()" class="form-error">{{ error() }}</div>
+      <input type="text" formControlName="name" placeholder="Full Name" />
+      <input type="email" formControlName="email" placeholder="Email" />
+      <input type="password" formControlName="password" placeholder="Password" />
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+      <button type="submit" class="submit-btn">Register</button>
+    </form>
+
+    <!-- Reset Password Form -->
+    <form *ngIf="mode === 'reset'" [formGroup]="resetForm" (ngSubmit)="reset()" class="fade-in">
+
+      <h2>Reset Password</h2>
+      <div *ngIf="error()" class="form-error">{{ error() }}</div>
+      <input type="email" formControlName="email" placeholder="Email" />
+      <button type="submit" class="submit-btn">Send Reset Link</button>
+    </form>
+
+    <!-- Close Button -->
+   <button class="close-btn" (click)="close()">×</button>
+
+  </div>
+</div>
