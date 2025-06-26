@@ -28,7 +28,7 @@
   .hamburger {
     background: none;
     border: none;
-    color: var(--text-color);
+    color: var(--text-color) !important;
     font-size: 1.4rem;
     cursor: pointer;
     position: fixed; // Fixed to stay on top
@@ -70,7 +70,7 @@
       button {
         background: none;
         border: none;
-        color: var(--text-color);
+        color: var(--text-color) !important;
         font-size: 1rem;
         margin: 0.5rem 0;
         cursor: pointer;
