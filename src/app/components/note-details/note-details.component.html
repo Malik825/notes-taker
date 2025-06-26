@@ -1,0 +1,19 @@
+<div class="note-details" *ngIf="note() as currentNote">
+  <h1 class="title">{{ currentNote.title }}</h1>
+  <p class="timestamp">🕒 Last updated: {{ currentNote.updatedAt | date:'short' }}</p>
+
+  <div class="content" [innerHTML]="currentNote.content"></div>
+
+  <div class="actions">
+    <button class="btn secondary" (click)="goBack()">← Back</button>
+    <button class="btn primary" (click)="editNote()">✏️ Edit</button>
+    <button class="btn danger" (click)="deleteNote()">🗑️ Delete</button>
+  </div>
+</div>
+
+<app-note-editor-modal
+  [visible]="showEditor()"
+  [note]="note()"
+  (save)="saveNote($event)"
+  (visibleChange)="closeModal()">
+</app-note-editor-modal>
