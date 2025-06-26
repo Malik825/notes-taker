@@ -1,0 +1,168 @@
+<main class="container">
+ <div class="sidebar">
+   <app-sidebar></app-sidebar>
+ </div>
+  <div class="flex-container">
+    <div class="content">
+      <div class="header">
+        <h2>Settings</h2>
+        <p>Customize your NoteApp experience</p>
+      </div>
+
+      <!-- Account Settings -->
+      <div class="card">
+        <h3>
+          <i class="fas fa-user-circle"></i> Account Settings
+        </h3>
+        <div class="space">
+          <div class="form-group">
+            <label>Username</label>
+            <input 
+              type="text" 
+              [(ngModel)]="settings.username"
+              placeholder="Enter your username"
+              class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input 
+              type="email" 
+              [(ngModel)]="settings.email"
+              placeholder="Enter your email"
+              class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Change Password</label>
+            <input 
+              type="password" 
+              [(ngModel)]="newPassword"
+              placeholder="Enter new password"
+              class="form-input">
+          </div>
+          <button 
+            (click)="updateAccount()" 
+            class="btn btn-primary"
+            [disabled]="isUpdating()">
+            <i class="fas fa-save"></i>
+            {{ isUpdating() ? 'Updating...' : 'Update Account' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- App Preferences -->
+      <div class="card">
+        <h3>
+          <i class="fas fa-cog"></i> App Preferences
+        </h3>
+        <div class="space">
+       
+          <div class="preference-item">
+            <div class="preference-info">
+              <label>Auto Save</label>
+              <p>Automatically save notes while typing</p>
+            </div>
+            <label class="toggle-switch">
+              <input 
+                type="checkbox" 
+                [(ngModel)]="settings.autoSave">
+              <div class="switch"></div>
+            </label>
+          </div>
+
+          <div class="preference-item">
+            <div class="preference-info">
+              <label>Notifications</label>
+              <p>Receive notifications for reminders</p>
+            </div>
+            <label class="toggle-switch">
+              <input 
+                type="checkbox" 
+                [(ngModel)]="settings.notifications">
+              <div class="switch"></div>
+            </label>
+          </div>
+
+         
+
+          <div class="form-group">
+            <label>Font Size: {{ settings.fontSize }}px</label>
+            <input 
+              type="range" 
+              [(ngModel)]="settings.fontSize" 
+              min="12" 
+              max="24"
+              class="range-slider">
+            <div class="range-labels">
+              <span>Small</span>
+              <span>Medium</span>
+              <span>Large</span>
+            </div>
+          </div>
+
+          <button 
+            (click)="savePreferences()" 
+            class="btn btn-primary"
+            [disabled]="isSaving()">
+            <i class="fas fa-check"></i>
+            {{ isSaving() ? 'Saving...' : 'Save Preferences' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Management -->
+      <div class="card">
+        <h3>
+          <i class="fas fa-database"></i> Data Management
+        </h3>
+        <div class="space">
+          <div class="data-stats">
+            <div class="stat-item">
+              <span class="stat-number">{{ totalNotes() }}</span>
+              <span class="stat-label">Total Notes</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ storageUsed() }}</span>
+              <span class="stat-label">Storage Used</span>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button 
+              (click)="exportData()" 
+              class="btn btn-secondary"
+              [disabled]="isExporting()">
+              <i class="fas fa-download"></i>
+              {{ isExporting() ? 'Exporting...' : 'Export Data' }}
+            </button>
+            <button 
+              (click)="importData()" 
+              class="btn btn-secondary">
+              <i class="fas fa-upload"></i>
+              Import Data
+            </button>
+            <button 
+              (click)="confirmDeleteAccount()" 
+              class="btn btn-danger">
+              <i class="fas fa-trash-alt"></i>
+              Delete Account
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div *ngIf="message()" class="alert" [class]="'alert-' + messageType()">
+        <i class="fas" [class]="messageIcon()"></i>
+        {{ message() }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input 
+    #fileInput 
+    type="file" 
+    accept=".json"
+    (change)="onFileSelected($event)"
+    style="display: none;">
+</main>
