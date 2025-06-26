@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router, RouterModule, ActivationEnd } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { NoteService } from '../services/note.service';
-import { Note } from '../models/note.model';
+import { AuthService } from '../../services/auth.service';
+import { NoteService } from '../../services/note.service';
+import { Note } from '../../models/note.model';
 import { ToastrService } from 'ngx-toastr';
-import { NoteEditorModalComponent } from '../components/noteeditor/note-editor.component';
-import { TagsComponent } from '../components/tags/tags.component';
-import { UserMenuComponent } from '../components/usermenu/user-menu.component';
-import { ThemeSwitcherComponent } from '../components/themeswitcher/theme-switcher.component';
+import { NoteEditorModalComponent } from '../noteeditor/note-editor.component';
+import { TagsComponent } from '../tags/tags.component';
+import { UserMenuComponent } from '../usermenu/user-menu.component';
+import { ThemeSwitcherComponent } from '../themeswitcher/theme-switcher.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -84,6 +84,11 @@ export class AppLayoutComponent {
 
   onNewNote(event: Event) {
     event.preventDefault();
+    // Collapse sidebar only on mobile view (≤ 991px)
+    if (window.innerWidth <= 991) {
+      this.sidebarCollapsed.set(true);
+      console.log('[New Note] Sidebar collapsed on mobile, screen size:', window.innerWidth);
+    }
     this.showEditor.set(true);
     this.noteService.clearNoteToEdit();
     console.log('[New Note] Editor opened');

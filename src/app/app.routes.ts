@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
+import { authGuard } from './components/auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,7 @@ export const routes: Routes = [
   // Notes route with AppLayoutComponent
   {
     path: 'notes',
-    loadComponent: () => import('./app-layout/app-layout.component').then(m => m.AppLayoutComponent),
+    loadComponent: () => import('./components/app-layout/app-layout.component').then(m => m.AppLayoutComponent),
     canActivate: [authGuard],
     children: [
       {
