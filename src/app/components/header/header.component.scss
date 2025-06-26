@@ -1,0 +1,175 @@
+@use '../../../styles/_theme.scss' as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 100vw;
+  padding: 1rem 2rem;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+    gap: 1rem;
+    @media screen and (max-width: 768px) {
+      align-items: start;
+      display: block;
+      .logo{
+        margin: 1rem 0;
+      }
+    }
+  }
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+
+    span {
+      font-weight: 600;
+      color: var(--secondary-color);
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 1rem;
+    animation: slideUpFadeIn 0.6s ease-out both;
+@media screen and (max-width: 768px) {
+  flex-direction: column;
+}
+    .btn {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition:
+        background-position 0.4s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      // background: linear-gradient(120deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      background: var(--accent-color);
+      background-size: 200% auto;
+      background-position: right center;
+
+      &:hover {
+        background-position: left center;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.4);
+      }
+
+      &.secondary {
+        background: transparent;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+
+        &:hover {
+          background: var(--primary-color);
+          color: white;
+        }
+      }
+    }
+  }
+
+ 
+}
+
+// Slide/fade animation
+@keyframes slideUpFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.2rem;
+
+    .container {
+      flex-direction: column;
+    }
+
+    .auth-buttons {
+      width: 100%;
+      display: flex;
+      .btn {
+        flex: 0 0 100%;
+        width: 100%;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0.75rem 1rem;
+
+    .logo {
+      font-size: 1.3rem;
+    }
+
+    .user-menu .avatar {
+      width: 2rem;
+      height: 2rem;
+      font-size: 0.85rem;
+    }
+
+    .user-menu .dropdown {
+      top: 2.5rem;
+      left: 0;
+      right: auto;
+      width: 100%;
+      max-width: 90vw;
+    }
+
+    .auth-buttons .btn {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.user_menu_profile{
+  @media (max-width:991px) {
+    display: none;
+  }
+}
+.header-theme{
+  @media (max-width:768px) {
+    display: none;
+  }
+}

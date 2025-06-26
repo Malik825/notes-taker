@@ -1,0 +1,22 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">🖋️ Nexus <span>Notes</span></div>
+
+    <div class="right">
+      <div *ngIf="user(); else guestButtons" class="user-menu-container">
+        <div class="user_menu_profile">
+          <app-user-menu></app-user-menu>
+        </div>
+      </div>
+      <ng-template #guestButtons>
+        <div class="auth-buttons">
+          <button class="btn secondary" (click)="authRequested.emit('signin')">Sign In</button>
+          <button class="btn primary" (click)="authRequested.emit('signup')">Sign Up</button>
+        </div>
+      </ng-template>
+    </div>
+    <div class="header-theme">
+        <app-theme-selector></app-theme-selector>
+    </div>
+  </div>
+</header>

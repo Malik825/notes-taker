@@ -1,0 +1,62 @@
+<div class="dashboard-container">
+<app-sidebar ></app-sidebar>
+
+  <main class="main-content">
+    <h2>Your Note Statistics</h2>
+    <p>Track your note-taking habits and productivity</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="icon">📝</span>
+        <div>
+          <strong>Total Notes</strong>
+          <p>{{ totalNotes() }} <span [ngClass]="{'trend-up': true}">↑12% from last month</span></p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="icon">✍️</span>
+        <div>
+          <strong>Words Written</strong>
+          <p>{{ totalWords() }} <span [ngClass]="{'trend-up': true}">↑8% from last month</span></p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="icon">🏷️</span>
+        <div>
+          <strong>Active Tags</strong>
+          <p>{{ activeTags() }} <span [ngClass]="{'trend-down': true}">↓3% from last month</span></p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <span class="icon">📅</span>
+        <div>
+          <strong>Weekly Activity</strong>
+          <p>{{ weeklyActivity() }}% <span [ngClass]="{'trend-up': true}">↑5% from last week</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-stats">
+      <div class="storage-bar">
+        <strong>Storage Used</strong>
+        <p>{{ storageUsed() }} (24% used)</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 24%;"></div>
+        </div>
+        <p>3.8GB free</p>
+      </div>
+    </div>
+
+    <div class="charts-container">
+      <div class="chart-card">
+        <canvas id="notesChart"></canvas>
+        <p>Notes Created Over Time <select><option>Last 90 days</option></select></p>
+      </div>
+      <div class="chart-card">
+        <canvas id="categoriesChart"></canvas>
+        <p>Note Categories <select><option>By Words</option></select></p>
+      </div>
+    </div>
+
+  </main>
+</div>

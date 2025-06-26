@@ -1,0 +1,59 @@
+@use '../../../styles/_theme.scss' as *;
+.user-menu {
+    position: relative;
+padding: 1.2rem;
+    .avatar {
+      background: var(--bg-color);
+      color: var(--secondary-color);
+      font-weight: bold;
+      border-radius: 9999px;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--secondary-color);
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 3rem;
+      right: 0;
+      background: var(--bg-color);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      min-width: 160px;
+      color: var(--text-color);
+      z-index: 100;
+      @media screen and (max-width: 768px) {
+        left: 3rem;
+        min-width: 300px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.79rem;
+      }
+
+      button {
+        background: none;
+        border: none;
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 0.5rem 0;
+      }
+    }
+  }

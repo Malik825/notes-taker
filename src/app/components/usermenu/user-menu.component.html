@@ -1,0 +1,14 @@
+<ng-container *ngIf="user() as currentUser">
+  <div class="user-menu" (click)="onToggle()" tabindex="0">
+    <div class="avatar">{{ currentUser.name[0] | uppercase }}</div>
+    <div *ngIf="showMenu" class="dropdown">
+      <p class="name">
+  {{ currentUser.name.split(' ')[0][0] }}{{ currentUser.name.split(' ')[1][0] }}
+</p>
+
+      <p class="email">{{ currentUser.email }}</p>
+      <hr />
+      <button (click)="onLogout()">Logout</button>
+    </div>
+  </div>
+</ng-container>
