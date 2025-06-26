@@ -1,9 +1,9 @@
-// note.model.ts
 export interface Note {
-  id?: string;
+  id: string;
   title: string;
   content: string;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
   tags?: string[];
+  archived?: boolean; // ✅ New property
 }
