@@ -39,9 +39,11 @@
         <span *ngFor="let tag of note.tags" class="note-tag">{{ tag }}</span>
       </div>
 
-      <div class="card-actions">
-        <button class="btn small secondary">Read More</button>
-      </div>
+    <div class="card-actions">
+  <button class="btn small secondary">Read More</button>
+  <button class="btn small warning" (click)="archive($event, note)">🗄️ Archive</button> <!-- ✅ Archive -->
+</div>
+
     </div>
   </div>
 </div>
