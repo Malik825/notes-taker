@@ -13,6 +13,7 @@
     margin-bottom: 2rem;
 @media screen and (max-width: 768px) {
   flex-direction: column;
+  margin-top: -3rem;
   .sort-select{
     flex: 1;
   }
@@ -62,7 +63,7 @@
 
   .notes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: 1.5rem;
 
     .note-card {
@@ -173,7 +174,11 @@
   max-width: 160px;
  
 }
-
+.card-actions {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
 .card-actions .btn {
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
@@ -191,4 +196,8 @@
       color: white;
     }
   }
+}
+.btn.small{
+  transition: .35s ease-in-out !important;
+  transform: translateY(0) !important;
 }

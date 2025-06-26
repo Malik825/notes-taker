@@ -12,7 +12,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
-
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 
@@ -171,6 +171,8 @@
 }
 .header-theme{
   @media (max-width:768px) {
-    display: none;
+    // display: none;
+    margin-top: .5rem;
+    width: 100%;
   }
 }

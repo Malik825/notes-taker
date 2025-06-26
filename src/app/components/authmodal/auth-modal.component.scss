@@ -25,6 +25,10 @@
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
   animation: popBounce 0.6s ease-out;
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    bottom: 2rem;
+  }
 
   h2 {
     margin-bottom: 1rem;
