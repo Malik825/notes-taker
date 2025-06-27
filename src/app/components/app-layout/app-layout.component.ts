@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, effect, computed, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router, RouterModule, ActivationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -9,7 +9,7 @@ import { NoteEditorModalComponent } from '../noteeditor/note-editor.component';
 import { TagsComponent } from '../tags/tags.component';
 import { UserMenuComponent } from '../usermenu/user-menu.component';
 import { ThemeSwitcherComponent } from '../themeswitcher/theme-switcher.component';
-import { filter } from 'rxjs/operators';
+import { filter, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -18,18 +18,23 @@ import { filter } from 'rxjs/operators';
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
-export class AppLayoutComponent {
+export class AppLayoutComponent implements OnDestroy {
+  // Signals for reactive state
   showEditor = signal(false);
   selectedNote = signal<Note | null>(null);
   tags = signal<string[]>([]);
   selectedTag = signal<string | null>(null);
-  sidebarCollapsed = signal(false); // Start uncollapsed for desktop, toggled on mobile
-
+  sidebarCollapsed = signal(false); // Controlled by toggleSidebar
   notes = signal<Note[]>([]);
   sortOrder = signal<'latest' | 'oldest'>('latest');
-  searchTerm: any;
   showMenu = signal(false);
-  currentRoute = signal<string>(''); // Track the current route
+  currentRoute = signal<string>('');
+
+  // Computed properties to reduce redundant calculations
+  isMobile = computed(() => window.innerWidth <= 991); // Cache mobile check
+  user = computed(() => this.auth.currentUser()); // Cache user state
+
+  private routerSubscription: Subscription | undefined;
 
   constructor(
     private auth: AuthService,
@@ -37,43 +42,52 @@ export class AppLayoutComponent {
     private toastr: ToastrService,
     private router: Router
   ) {
+    // Load tags once and cache
     this.loadTags();
-    this.searchTerm = this.noteService.searchTerm;
 
-    // Listen to route changes to update currentRoute
-    this.router.events.pipe(
+    // Optimize router subscription with cleanup
+    this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof ActivationEnd)
     ).subscribe((event: any) => {
       this.currentRoute.set(event.snapshot.routeConfig?.path || '');
       console.log('[Route Change] Current route:', this.currentRoute());
     });
+
+    // Effect to react to tag changes (optional optimization)
+    effect(() => {
+      const currentTag = this.selectedTag();
+      console.log('[Effect] Selected tag changed:', currentTag);
+      // Additional logic if needed
+    }, { allowSignalWrites: false }); // Prevent signal writes in effect
+  }
+
+  ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+      console.log('[Destroy] Router subscription cleaned up');
+    }
   }
 
   toggleSidebar() {
     this.sidebarCollapsed.update(value => {
       const newValue = !value;
-      console.log('[ToggleSidebar] Sidebar collapsed:', newValue, 'Screen size:', window.innerWidth);
+      console.log('[ToggleSidebar] Sidebar collapsed:', newValue, 'Screen size:', this.isMobile());
       return newValue;
     });
   }
 
   loadTags() {
-    const allTags = this.noteService.getAllTags();
-    console.log('[Tags] Loaded:', allTags);
-    this.tags.set(allTags);
+    const cachedTags = this.noteService.getAllTags(); // Assume this is memoized in NoteService
+    console.log('[Tags] Loaded:', cachedTags);
+    this.tags.set(cachedTags);
   }
 
   onTagClick(tag: string | null) {
-    const current = this.noteService.selectedTag();
-    this.noteService.selectedTag.set(current === tag ? null : tag);
+    this.selectedTag.set(tag === this.selectedTag() ? null : tag);
   }
 
   changeSort(order: 'latest' | 'oldest') {
-    this.noteService.sortOrder.set(order);
-  }
-
-  user() {
-    return this.auth.currentUser();
+    this.sortOrder.set(order);
   }
 
   logout() {
@@ -84,18 +98,13 @@ export class AppLayoutComponent {
 
   onNewNote(event: Event) {
     event.preventDefault();
-    // Collapse sidebar only on mobile view (≤ 991px)
-    if (window.innerWidth <= 991) {
-      this.sidebarCollapsed.set(true);
-      console.log('[New Note] Sidebar collapsed on mobile, screen size:', window.innerWidth);
-    }
     this.showEditor.set(true);
     this.noteService.clearNoteToEdit();
     console.log('[New Note] Editor opened');
   }
 
   onSaveNote(note: Note) {
-    const user = this.auth.currentUser();
+    const user = this.user();
     if (!user) return;
 
     this.noteService.addOrUpdateNote(user.id, note);
@@ -113,5 +122,14 @@ export class AppLayoutComponent {
 
   toggleDropdown() {
     this.showMenu.update(value => !value);
+  }
+
+  onMyNotesClick(event: Event) {
+    if (this.isMobile()) {
+      this.sidebarCollapsed.set(true);
+      console.log('[My Notes] Sidebar collapsed on mobile, screen size:', window.innerWidth);
+    }
+    // Prevent default navigation if needed (e.g., if href is used instead of routerLink)
+    event.preventDefault();
   }
 }

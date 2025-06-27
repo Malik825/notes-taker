@@ -11,7 +11,6 @@ export const routes: Routes = [
     path: 'welcome',
     loadComponent: () => import('./components/welcome/welcome.component').then(m => m.WelcomeComponent)
   },
-  // Notes route with AppLayoutComponent
   {
     path: 'notes',
     loadComponent: () => import('./components/app-layout/app-layout.component').then(m => m.AppLayoutComponent),
@@ -31,26 +30,35 @@ export const routes: Routes = [
       }
     ]
   },
-  // Other authenticated routes without AppLayoutComponent
   {
     path: 'dashboard',
     canActivate: [authGuard],
-    loadComponent: () => import('./components/statistics-dashboard/statistics-dashboard.component').then(
-      (m) => m.StatisticsDashboardComponent
-    )
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./components/statistics-dashboard/statistics-dashboard.component').then(m => m.StatisticsDashboardComponent)
+      },
+      {
+        path: 'archives',
+        loadComponent: () => import('./components/archived/archived.component').then(m => m.ArchivedComponent)
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./components/settings/settings.component').then(m => m.SettingsComponent)
+      }
+    ]
   },
-
   {
     path: 'settings',
     canActivate: [authGuard],
     loadComponent: () => import('./components/settings/settings.component').then(m => m.SettingsComponent)
   },
   {
-  path: 'archive',
-  loadComponent: () =>
-    import('./components/archived/archived.component').then(m => m.ArchivedComponent)
-},
-
-  // Wildcard route for 404
-  { path: '**', redirectTo: 'welcome' }
+    path: 'archive',
+    loadComponent: () => import('./components/archived/archived.component').then(m => m.ArchivedComponent)
+  },
+  {
+    path: '**',
+    redirectTo: 'welcome'
+  }
 ];

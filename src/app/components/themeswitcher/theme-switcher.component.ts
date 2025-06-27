@@ -10,7 +10,7 @@ import { ThemeService, AppTheme } from '../../services/theme.service'; // ✅ <-
   styleUrls: ['./theme-switcher.component.scss']
 })
 export class ThemeSwitcherComponent {
-  themes: AppTheme[] = ['light', 'dark', 'sunset', 'night', 'cloud', 'forest', 'ocean', 'strawberry'];
+  themes: AppTheme[] = ['light', 'dark', 'sunset',  'cloud', 'forest', 'ocean', 'strawberry'];
 
   constructor(public themeService: ThemeService) {}
 

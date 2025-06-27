@@ -42,6 +42,16 @@
     justify-content: flex-end;
     gap: 1rem;
     margin-top: 1rem;
+    flex-wrap: wrap;
+    @media screen and (max-width: 768px) {
+      justify-content: flex-start;
+    }
+    @media screen and (max-width: 480px) {
+      justify-content: center;
+      .btn{
+        width: 100%;
+      }
+    }
 
     .btn {
       padding: 0.6rem 1.5rem;

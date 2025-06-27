@@ -66,7 +66,7 @@ export class NoteService {
     const allTags = this.notes()
       .flatMap(note => note.tags)
       .filter((tag): tag is string => !!tag);
-    const defaultTags = ['Work', 'Personal', 'Ideas', 'Research', 'Other'];
+    const defaultTags = ['Work', 'Personal', 'Ideas', ];
     return [...new Set([...allTags, ...defaultTags])];
   }
 

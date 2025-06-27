@@ -21,7 +21,7 @@ export class NoteEditorModalComponent implements OnChanges {
   @Output() save = new EventEmitter<Note>();
 
   noteForm: FormGroup;
-  defaultTags: string[] = ['Work', 'Personal', 'Ideas', 'Research', 'Other']; // Default tags
+  defaultTags: string[] = ['Work', 'Personal', 'Ideas']; // Default tags
 
   constructor(private fb: FormBuilder) {
     this.noteForm = this.fb.group({

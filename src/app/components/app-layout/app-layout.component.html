@@ -1,49 +1,43 @@
 <div class="layout" [class.collapsed]="sidebarCollapsed()" [class.expanded]="!sidebarCollapsed()">
   <button class="hamburger" (click)="toggleSidebar()" [class.active]="!sidebarCollapsed()">
-    <i class="fas fa-bars"></i>
+    <i *ngIf="sidebarCollapsed()" class="fas fa-bars"></i>
+    <i *ngIf="!sidebarCollapsed()" class="fas fa-times"></i>
   </button>
   <aside class="sidebar" [class.collapsed]="sidebarCollapsed()" [class.expanded]="!sidebarCollapsed()">
-  
     <nav>
       <a routerLink="/dashboard" routerLinkActive="active">
         <i class="fas fa-chart-pie"></i><span>Dashboard</span>
       </a>
-      <a routerLink="/notes" routerLinkActive="active">
+      <a routerLink="/notes" routerLinkActive="active" (click)="onMyNotesClick($event)">
         <i class="fas fa-book"></i><span>My Notes</span>
       </a>
       <a href="#" (click)="onNewNote($event)">
         <i class="fas fa-plus-circle"></i><span>New Note</span>
       </a>
-      <a routerLink="/archive" routerLinkActive="active">
+      <a routerLink="/dashboard/archives" routerLinkActive="active">
         <i class="fas fa-archive"></i><span>Archived Notes</span>
       </a>
-     
+      <a routerLink="/dashboard/settings" routerLinkActive="active">
+        <i class="fas fa-cog"></i><span>Settings</span>
+      </a>
     </nav>
-
     <div class="line"></div>
-
     <h3 class="tag-title">Filter by</h3>
     <app-tags
       [tags]="tags()"
       [selectedTag]="selectedTag()"
       (tagSelected)="onTagClick($event)">
     </app-tags>
-
     <div class="line"></div>
-
-    <!-- Inserted User Menu Component -->
-   <div class="profile">
-     <div class="user">
-      <app-user-menu></app-user-menu>
+    <div class="profile">
+      <div class="user">
+        <app-user-menu></app-user-menu>
+      </div>
+      <div class="theme">
+        <app-theme-selector></app-theme-selector>
+      </div>
     </div>
-    <div class="theme">
-     <app-theme-selector></app-theme-selector>
-    </div>
-   </div>
-    <!-- Optional fallback for non-authenticated users -->
-    <!-- <div *ngIf="!user()">Please log in</div> -->
   </aside>
-
   <main class="main">
     <router-outlet></router-outlet>
   </main>

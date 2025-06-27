@@ -1,66 +1,69 @@
 @use '../../../styles/_theme.scss' as *;
+
 .user-menu {
-    position: relative;
-// padding: 1.2rem;
-    .avatar {
-      background: var(--bg-color);
-      color: var(--secondary-color);
-      font-weight: bold;
-      border-radius: 9999px;
-      width: 2.5rem;
-      height: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--secondary-color);
+  position: relative;
+  display: inline-block;
+
+  .avatar {
+    background: var(--bg-color);
+    color: var(--secondary-color);
+    font-weight: bold;
+    border-radius: 9999px;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--secondary-color);
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem); // drop slightly below avatar
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface-color);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    min-width: 240px;
+    max-width: 320px;
+    width: max-content;
+    color: var(--text-color);
+    z-index: 99;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+
+    @media screen and (max-width: 768px) {
+      left: 8rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-color);
+      line-height: 1.4;
+    }
+
+    button {
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
       cursor: pointer;
-      @media screen and (max-width: 768px) {
-        margin-left: 1rem;
+      color: var(--text-color);
+
+      &:hover {
+        color: var(--primary-color);
       }
     }
 
-    .dropdown {
-      position: absolute;
-      top: 1.8rem;
-      right: 0;
-      background: var(--bg-color);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      min-width: 160px;
-      color: var(--text-color);
-      z-index: 100;
-      @media screen and (max-width: 768px) {
-        left: 3rem;
-        min-width: 300px;
-        top: -4rem;
-      }
-
-      p {
-        margin: 0;
-        font-size: 0.79rem;
-        color: var(--text-color);
-      }
-
-      button {
-        background: none;
-        border: none;
-        width: 100%;
-        text-align: left;
-        padding: 0.5rem 0;
-        font-size: 0.9rem;
-        margin-top: -1rem;
-        cursor: pointer;
-        color: var(--text-color);
-
-        &:hover {
-          color: var(--primary-color);
-        }
-      }
-
-      hr {
-        border: none;
-        border-top: 1px solid var(--border-color);
-        margin: 0.5rem 0;
-      }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 0.75rem 0;
     }
   }
+}

@@ -10,7 +10,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; // Below hamburger
+  z-index: 1000;
   animation: fadeInNavbar 0.5s ease-out;
 
   .logo {
@@ -34,7 +34,7 @@
     position: fixed; // Fixed to stay on top
     top: 1rem; // Adjusted to sit within navbar padding
     right: 1rem;
-    z-index: 1001; // Above navbar
+    z-index: 10; // Above navbar
     display: none; // Hidden by default
     transition: transform 0.3s ease, opacity 0.3s ease;
 
@@ -51,11 +51,15 @@
       opacity: 0.8;
     }
   }
-
+.avater{
+  margin-top: 1rem;
+}
   .user-menu {
     position: relative;
     transition: opacity 0.3s ease;
-
+    margin-left: 1rem;
+    margin-top: .5rem;
+    
     .dropdown-menu {
       position: absolute;
       top: 100%;
@@ -66,7 +70,9 @@
       padding: 0.5rem;
       display: none;
       animation: slideDown 0.3s ease-out;
-
+@media screen and (max-width: 768px) {
+  left: 5rem;
+}
       button {
         background: none;
         border: none;
@@ -154,6 +160,13 @@
   &.expanded {
     transform: translateX(0);
     animation: slideIn 0.5s ease-out;
+  }
+
+  /* Refined rule to ensure collapse on mobile when My Notes is clicked */
+  @media (max-width: 991px) {
+    &.expanded {
+      /* No direct click handling; rely on TypeScript state change */
+    }
   }
 
   .logo {
@@ -283,7 +296,7 @@
   position: fixed;
   top: 1rem; // Align with navbar top padding
   right: 1rem;
-  z-index: 1001; // Above navbar and sidebar
+  z-index: 1000; // Above navbar and sidebar
   font-size: 1.4rem; // Consistent with navbar hamburger
   display: none;
   cursor: pointer;
@@ -431,4 +444,5 @@ body.dark-theme .hamburger {
 
 .user {
   margin-left: 1rem;
+  margin-top: 1rem;
 }
